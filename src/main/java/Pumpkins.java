@@ -3,51 +3,35 @@ import processing.core.PApplet;
 public class Pumpkins extends PApplet {
     public static int width = 800;
     public static int height = 600;
-
-    // 1. DECLARING THE PUMPKIN VARIABLE
-    //
-    // declare a variable of type Pumpkin
-    // example: Pumpkin myPumpkin;
+    public static Pumpkin myPumpkin;
+    public static Pumpkin[] pumpkins;
 
 
     @Override
     public void setup() {
-        // 2. INITIALIZING THE PUMPKIN VARIABLE
-        //
-        // Initialize the pumpkin variable.
-        //                                   x       pumpkin color
-        // example: myPumpkin = new Pumpkin(450, color(226, 98, 56), this);
+        myPumpkin = new Pumpkin(450, color(226, 98, 56), this);
 
-
+        pumpkins = new Pumpkin[]{
+                new Pumpkin(100, color(0,0,225), this),
+                new Pumpkin(300, color(255,69,0), this),
+                new Pumpkin(500, color(255,105,180), this),
+                new Pumpkin(700, color(128,0,128), this),
+        };
+        for(Pumpkin p : pumpkins) { //bounce and height and speed for pumpkins
+            p.setBounceHeight(100);
+            p.moveLeft(3);
+            p.bounce();
+        }
     }
-
     @Override
-    public void draw() {
+    public void draw(){
         background(0);
         drawFloor();
-
-        // 3. DRAW THE PUMPKIN
-        //
-        // Call the pumpkin variable's draw() method
-        // example: myPumpkin.draw();
-
-
-
-        // 4. DRAW MORE PUMPKINS
-        //
-        // Can you figure out how to create and draw more pumpkins (array)
-        // with different colors?
-        // Can you figure out how to make the pumpkin bounce?
-
+        myPumpkin.draw();
+        for(Pumpkin p : pumpkins) {
+            p.draw();
+        }
     }
-
-
-
-
-
-
-
-
     void drawFloor() {
         int floorHeight = 30;
 
@@ -56,12 +40,10 @@ public class Pumpkins extends PApplet {
         rect(0, height - floorHeight, width, floorHeight);
         popMatrix();
     }
-
     @Override
     public void settings() {
         size(width, height);
     }
-
     public static void main(String[] args) {
         PApplet.main(Pumpkins.class.getName());
     }
@@ -198,3 +180,24 @@ class Pumpkin {
         p.popMatrix();
     }
 }
+
+
+// 1. DECLARING THE PUMPKIN VARIABLE
+//
+// declare a variable of type Pumpkin
+// example: Pumpkin myPumpkin;
+// 2. INITIALIZING THE PUMPKIN VARIABLE
+//
+// Initialize the pumpkin variable.
+//                                   x       pumpkin color
+// example: myPumpkin = new Pumpkin(450, color(226, 98, 56), this);
+// 3. DRAW THE PUMPKIN
+//
+// Call the pumpkin variable's draw() method
+// example: myPumpkin.draw();
+// myPumpkin.draw();
+// 4. DRAW MORE PUMPKINS
+//
+// Can you figure out how to create and draw more pumpkins (array)
+// with different colors?
+// Can you figure out how to make the pumpkin bounce?
